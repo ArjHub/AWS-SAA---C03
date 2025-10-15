@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# echo "Listing Objects ... "
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0"
+    exit 1
+fi
+
+# echo "$1"
+
+aws s3api list-objects --bucket $1 --output json \
+    --query '{Objects: Contents[].{Key: Key}}'

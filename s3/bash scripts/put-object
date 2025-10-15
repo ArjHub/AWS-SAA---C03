@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+
+echo "Putting an object into S3 bucket..."
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0"
+    exit 1
+fi

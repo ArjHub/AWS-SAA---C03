@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "Fetching the newest S3 bucket..."
+aws s3api list-buckets --query 'Buckets | sort_by(@, &CreationDate) | [-1].Name' --output text

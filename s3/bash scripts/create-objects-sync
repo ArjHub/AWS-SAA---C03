@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+echo "Creating random files and syncing to S3 bucket..."
+
+# Check arguments (1 or 2 or 3 allowed)
+if [ "$#" -lt 2 ] || [ "$#" -gt 3 ]; then
+    echo "Usage: $0 <bucket-name> <number-of-files> [prefix]"
+    exit 1
+fi
+
+BUCKET_NAME="$1"
+NUM_FILES="$2"
+PREFIX="${3:-}"  # Optional prefix
+TMP_DIR="./tmp/s3-random-files"
+
+# Clean up old files if any
+rm -rf "$TMP_DIR"
+mkdir -p "$TMP_DIR"
+
+echo "Creating $NUM_FILES random files in $TMP_DIR..."
+for i in $(seq 1 "$NUM_FILES"); do
+    FILE_NAME="file_${i}.txt"
+    head -c $((RANDOM % 5000 + 1000)) /dev/urandom | base64 | head -c 1024 > "$TMP_DIR/$FILE_NAME"
+    echo "Created: $FILE_NAME"
+done
+
+# Build S3 path depending on prefix
+if [ -n "$PREFIX" ]; then
+    S3_PATH="s3://$BUCKET_NAME/$PREFIX/"
+else
+    S3_PATH="s3://$BUCKET_NAME/"
+fi
+
+echo "Uploading files to $S3_PATH ..."
+aws s3 sync "$TMP_DIR" "$S3_PATH"
+
+# Remove temporary files
+rm -r "$TMP_DIR"

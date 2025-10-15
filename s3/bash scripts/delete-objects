@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+echo "Deleting Objects ..."
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <bucket-name>"
+    exit 1
+fi
+
+BUCKET="$1"
+LIST="$(dirname "$0")/list-objects"
+
+if [ ! -x "$LIST" ]; then
+    echo "Error: $LIST script not found or not executable."
+    exit 1
+fi
+
+echo "Fetching object list from list-objects ..."
+JSON_INPUT=$("$LIST" "$BUCKET")
+
+if [ -z "$JSON_INPUT" ] || [ "$JSON_INPUT" == "{}" ]; then
+    echo "No objects found in $BUCKET. Nothing to delete."
+    exit 0
+fi
+
+# Save JSON to a temporary file
+TMP_JSON="/Users/ajju/Documents/AWS SAA - C03/temp.json"
+
+echo "$JSON_INPUT" > "$TMP_JSON"
+
+# Delete using file://
+aws s3api delete-objects \
+    --bucket "$BUCKET" \
+    --delete file://"$TMP_JSON"
+
+# rm "$TMP_JSON"
+
+echo "Deletion complete for bucket: $BUCKET"
