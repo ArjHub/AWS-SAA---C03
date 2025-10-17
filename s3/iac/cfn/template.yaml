@@ -1,0 +1,7 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: AWS CloudFormation Template to create an S3 Bucket
+Resources:
+  # https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-s3-bucket.html
+  MyS3Bucket:
+    Type: AWS::S3::Bucket
+    # Aws generates bucket name for us if not specified
