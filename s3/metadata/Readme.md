@@ -34,3 +34,8 @@ aws s3 cp myfile.txt s3://metadata-fun-ajju --metadata x-amz-meta-mykey=myvalue
 ```md
 aws s3api head-object --bucket metadata-fun-ajju --key myfile.txt
 ```
+## Cleanup
+
+```md
+aws s3 rb s3://metadata-fun-ajju --force
+```
