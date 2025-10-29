@@ -21,14 +21,14 @@ md5sum My_file.txt
 
 # Upload our file to s3
 
-```md
+```sh
 aws s3 cp My_file.txt s3://checksum-example-ajju
 aws s3api head-object --bucket checksum-example-ajju --key My_file.txt
 ```
 
 # Uploading a file with a different cheksum usign aws cli
 
-```md
+```sh
 aws s3 cp My_file.txt s3://checksum-example-ajju --checksum-algorithm CRC32
 aws s3api head-object --bucket checksum-example-ajju --key My_file.txt
 ```
