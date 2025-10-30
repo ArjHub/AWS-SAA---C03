@@ -21,3 +21,13 @@ aws s3 cp myfile.txt s3://change-class-funbucket/onezone-myfile
 aws s3 cp myfile.txt s3://change-class-funbucket/glacier-myfile
 --storage-class GLACIER
 ```
+
+## S3 glacier vault vs glacier storage classes
+![S3 Glacier Vault Overview](./s3_glacier_vault.png)
+
+## S3 glacier flexible
+![S3 Glacier Flexible Overview](./glacier_flexible.png)
+
+
+# Storage Class comparison
+![Storage Class Comparison](./storage_class_comparison.png) 
