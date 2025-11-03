@@ -42,3 +42,13 @@ aws s3 ls s3://my-acl-fun-bucket/
 aws s3api put-bucket-acl --bucket my-acl-fun-bucket \
 --acl private
 ```
+
+## Now try to access the bucket from the other AWS account
+```sh
+aws s3 ls s3://my-acl-fun-bucket/
+```
+## You will get Access Denied error
+## Clean up
+```sh
+aws s3 rb s3://my-acl-fun-bucket --force
+```
