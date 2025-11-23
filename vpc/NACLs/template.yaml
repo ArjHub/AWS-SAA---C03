@@ -1,0 +1,86 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Create an EC2 instance with SSM role and Security Group"
+
+Parameters:
+  ImageId:
+    Type: String
+    Description: "The AMI ID for the EC2 instance"
+    Default: "ami-0eb5549427fc55d57"
+
+  SubnetId:
+    Type: String
+    Description: "The Subnet ID where the EC2 instance will be launched"
+    Default: "subnet-0781e6fc885a58beb"
+
+  VpcId:
+    Type: String
+    Description: "The VPC ID where the instance and SG will be created"
+    Default: "vpc-00485e7631ea0848a"
+
+Resources:
+
+  ## 1. Security Group
+  MySecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Allow SSH access"
+      VpcId: !Ref VpcId
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        # For Apache to be reachable via browser we allow inbound HTTP (port 80)
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: MyCFNSecurityGroup
+
+  ## 2. Create the role can attahc the managed policy to allow SSM
+  EC2SSMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: "sts:AssumeRole"
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+      Tags:
+        - Key: Name
+          Value: EC2SSMRole
+
+  ## 3. Instance Profile that EC2 will use
+  EC2InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - !Ref EC2SSMRole
+
+  ## 4. EC2 Instance
+  MyEC2Instance: 
+    Type: AWS::EC2::Instance
+    Properties: 
+      ImageId: !Ref ImageId
+      InstanceType: t3.micro
+      SubnetId: !Ref SubnetId
+      SecurityGroupIds:
+        - !Ref MySecurityGroup
+      IamInstanceProfile: !Ref EC2InstanceProfile
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          yum update -y
+          yum install -y httpd
+          systemctl enable httpd
+          systemctl start httpd
+          echo "<h1>Apache server installed via CloudFormation!</h1>" > /var/www/html/index.html
+      Tags:
+        - Key: Name
+          Value: MyCFNEC2Instance
