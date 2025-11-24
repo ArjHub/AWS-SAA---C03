@@ -157,7 +157,3 @@ Used for VPN connections to on‑premise networks.
 | **Public Subnet**   | Uses IGW                                          |
 | **Private Subnet**  | Uses NAT                                          |
 | **Isolated Subnet** | No internet route                                 |
-
----
-
-If you want, I can generate a combined VPC + Subnet + Route Table diagram or add examples for real architectures.
