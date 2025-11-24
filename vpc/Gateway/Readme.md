@@ -6,7 +6,7 @@ This guide explains the major AWS gateways in simple terms with clear examples.
 
 ---
 
-# ## 1. Internet Gateway (IGW)
+# 1. Internet Gateway (IGW)
 
 ### **Purpose:**
 
@@ -28,7 +28,7 @@ Enables **public internet access** for resources (EC2 instances, NAT gateways, A
 
 ---
 
-# ## 2. NAT Gateway (NAT-GW)
+# 2. NAT Gateway (NAT-GW)
 
 ### **Purpose:**
 
@@ -53,7 +53,7 @@ Private instances need internet access (patches, SSM, downloads) but must remain
 
 ---
 
-# ## 3. Egress-Only Internet Gateway (EOIGW)
+# 3. Egress-Only Internet Gateway (EOIGW)
 
 ### **Purpose:**
 
@@ -75,7 +75,7 @@ Allows **IPv6 outbound** internet traffic, blocks **all inbound traffic**.
 
 ---
 
-# ## 4. VPC Endpoint (Gateway Type)
+# 4. VPC Endpoint (Gateway Type)
 
 ### **Purpose:**
 
@@ -100,7 +100,7 @@ pl-xxxx → vpce-xxxx
 
 ---
 
-# ## 5. Virtual Private Gateway (VGW)
+# 5. Virtual Private Gateway (VGW)
 
 ### **Purpose:**
 
@@ -120,7 +120,7 @@ On-Prem Network (10.20.0.0/16) → vgw-xxxx
 
 ---
 
-# ## 6. Customer Gateway (CGW)
+# 6. Customer Gateway (CGW)
 
 ### **Purpose:**
 
@@ -138,7 +138,7 @@ Represents your **on-premises router/firewall** in AWS during a VPN connection.
 
 ---
 
-# ## 7. Transit Gateway (TGW)
+# 7. Transit Gateway (TGW)
 
 ### **Purpose:**
 
@@ -156,7 +156,7 @@ Multi-account, multi-VPC enterprise networks.
 
 ---
 
-# ## 8. Gateway Load Balancer (GWLB)
+# 8. Gateway Load Balancer (GWLB)
 
 ### **Purpose:**
 
@@ -181,7 +181,7 @@ Examples:
 
 ---
 
-# ## Summary Table
+# Summary Table
 
 | Gateway Type                | Direction                | IPv4/IPv6 Support | Primary Function               |
 | --------------------------- | ------------------------ | ----------------- | ------------------------------ |
@@ -205,7 +205,7 @@ If you want, I can also add:
 
 ---
 
-# ## Interview‑Ready Q&A (Gateways)
+# Interview‑Ready Q&A (Gateways)
 
 ### **Q1: What is the difference between an Internet Gateway and a NAT Gateway?**
 
@@ -241,7 +241,7 @@ It distributes traffic across **security appliances** such as firewalls and IDS/
 
 ---
 
-# ## Flow Diagrams for Each Gateway Type
+# Flow Diagrams for Each Gateway Type
 
 ### **Internet Gateway (IGW)**
 
@@ -337,7 +337,7 @@ Return Traffic
 
 ---
 
-# ## Route Table Examples
+# Route Table Examples
 
 ### **1. Public Subnet Route Table**
 
