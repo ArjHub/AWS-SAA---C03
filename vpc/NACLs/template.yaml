@@ -67,7 +67,7 @@ Resources:
   MyEC2Instance: 
     Type: AWS::EC2::Instance
     Properties: 
-      ImageId: !Ref ImageId
+      ImageId: !Ref ImageId 
       InstanceType: t3.micro
       SubnetId: !Ref SubnetId
       SecurityGroupIds:
