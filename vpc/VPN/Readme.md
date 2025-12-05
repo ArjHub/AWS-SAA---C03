@@ -49,3 +49,9 @@ When configuring CGW we will be needing
 ## Client VPN
 AWS Client VPN is a managed client-based VPN service that enables you to securely connect your users to
 your AWS VPC from any location using OpenVPN-based clients.
+### Types of authentication that can be done to connect
+- **Active Directory Authentication**: Integrate with AWS Directory Service or your on-premises Active Directory.
+- **Mutual Authentication**: Use client and server certificates for authentication.
+- **Certifictate based authentication**: Use certificates issued by a trusted Certificate Authority (CA).
+- **SAML-based authentication**: Integrate with SAML 2.0-compliant identity providers for federated authentication.
+ 
