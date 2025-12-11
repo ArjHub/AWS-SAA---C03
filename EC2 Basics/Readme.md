@@ -365,11 +365,11 @@ When you delete a Spot Fleet:
 
 | Feature                 | Spot Instance | Spot Fleet |
 | ----------------------- | ------------- | ---------- |
-| Single instance         |             | ❌          |
-| Multiple instance types | ❌             |          |
-| Auto-replacement        | ❌             |          |
-| Cost optimization       | Limited       | Excellent  |
-| Production ready        | ❌             |          |
+| Single instance         |               | ❌         |
+| Multiple instance types | ❌            |            |
+| Auto-replacement        | ❌            |            |
+| Cost optimization       | Limited       |Excellent   |
+| Production ready        | ❌            |            |
 
 ---
 
