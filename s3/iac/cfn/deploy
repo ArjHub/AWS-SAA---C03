@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+echo "Deploying S3 bucket via cloudformation ... "
+
+STACK_NAME="s3-bucket-stack"
+
+aws cloudformation deploy \
+    --template-file ./s3/iac/cfn/template.yaml \
+    --stack-name $STACK_NAME \
+    --region us-west-2 \
+    --no-execute-changeset
